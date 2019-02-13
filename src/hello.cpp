@@ -1,6 +1,6 @@
 #include "hello.h"
 
 std::ostream &hello(std::ostream &os) {
-  os << "Hello, World";
+  os << "Goodbye, World";
   return os;
 }

@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.12)
 
 project ("hello" 
     LANGUAGES CXX
-    VERSION 0.1.0)
+    VERSION 0.2.0)
 
 set(INSTALL_INCLUDE_DIR include)
 set(INSTALL_ARCHIVE_DIR lib/${CMAKE_PROJECT_NAME})
