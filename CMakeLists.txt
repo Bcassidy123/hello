@@ -2,9 +2,9 @@ cmake_minimum_required(VERSION 3.12)
 
 project ("hello" 
     LANGUAGES CXX
-    VERSION 0.3.0)
+    VERSION 0.4.0)
 
-set(CONAN_CMAKE ${CMAKE_BINARY_DIR}/cmake/conan.cmake)
+set(CONAN_CMAKE ${CMAKE_CURRENT_BINARY_DIR}/cmake/conan.cmake)
 if(NOT EXISTS ${CONAN_CMAKE})
    message(STATUS "Downloading conan.cmake from https://github.com/conan-io/cmake-conan")
    file(DOWNLOAD "https://github.com/conan-io/cmake-conan/raw/v0.13/conan.cmake"
