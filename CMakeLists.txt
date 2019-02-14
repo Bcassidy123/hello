@@ -2,7 +2,21 @@ cmake_minimum_required(VERSION 3.12)
 
 project ("hello" 
     LANGUAGES CXX
-    VERSION 0.2.0)
+    VERSION 0.3.0)
+
+set(CONAN_CMAKE ${CMAKE_BINARY_DIR}/cmake/conan.cmake)
+if(NOT EXISTS ${CONAN_CMAKE})
+   message(STATUS "Downloading conan.cmake from https://github.com/conan-io/cmake-conan")
+   file(DOWNLOAD "https://github.com/conan-io/cmake-conan/raw/v0.13/conan.cmake"
+                 ${CONAN_CMAKE})
+endif()
+
+include(${CONAN_CMAKE})
+
+conan_cmake_run(REQUIRES fmt/5.3.0@bincrafters/stable
+                BASIC_SETUP 
+                CMAKE_TARGETS
+                BUILD missing)
 
 set(INSTALL_INCLUDE_DIR include)
 set(INSTALL_ARCHIVE_DIR lib/${CMAKE_PROJECT_NAME})
@@ -13,6 +27,7 @@ set(CONFIG_NAME ${CMAKE_PROJECT_NAME}-config)
 add_library(${CMAKE_PROJECT_NAME} STATIC
     include/hello.h src/hello.cpp
     )
+target_link_libraries(${CMAKE_PROJECT_NAME} PUBLIC CONAN_PKG::fmt)
 target_compile_features(${CMAKE_PROJECT_NAME} PUBLIC cxx_std_17)
 target_include_directories(${CMAKE_PROJECT_NAME} PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
